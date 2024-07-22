@@ -1,0 +1,25 @@
+.underline-button {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    padding: 8px 16px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .underline-button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    transition: width 0.3s ease-out;
+  }
+  
+  .underline-button:hover::after {
+    width: 100%; /* Expand width to 100% on hover */
+  }
+  
