@@ -3,7 +3,12 @@ import {
   FaRegArrowAltCircleLeft,
   FaRegArrowAltCircleRight,
 } from "react-icons/fa";
-import { BrownButton, ReloadButton, UnderlineButton } from "../components/Button_style";
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import {
+  BrownButton,
+  ReloadButton,
+  UnderlineButton,
+} from "../components/Button_style";
 import { Box } from "@mui/material";
 import { motion } from "framer-motion";
 import Dropdown from "../components/Dropdown";
@@ -149,7 +154,7 @@ const Rs_body = () => {
           />
         ))}
       </div>
-      <div className="w-full h-12 absolute bottom-[20%] flex items-center justify-center gap-6">
+      <div className="w-4/5 h-12 absolute bottom-[20%] flex items-center justify-center gap-6">
         <span
           className="text-white text-[16px] font-bold"
           style={{ lineHeight: "1.5" }}
@@ -163,6 +168,113 @@ const Rs_body = () => {
         <ReloadButton />
       </div>
     </section>
+  );
+};
+
+export const BrandCarousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const brands = [
+    {
+      name: "BBK",
+      img: "https://cdn11.bigcommerce.com/s-35csgqmz9s/product_images/uploaded_images/brand-1.png",
+    },
+    {
+      name: "Misov",
+      img: "https://cdn11.bigcommerce.com/s-35csgqmz9s/product_images/uploaded_images/brand-2.png",
+    },
+    {
+      name: "MOSINO",
+      img: "https://cdn11.bigcommerce.com/s-35csgqmz9s/product_images/uploaded_images/brand-3.png",
+    },
+    {
+      name: "KONI",
+      img: "https://cdn11.bigcommerce.com/s-35csgqmz9s/product_images/uploaded_images/brand-4.png",
+    },
+    {
+      name: "MOAK",
+      img: "https://cdn11.bigcommerce.com/s-35csgqmz9s/product_images/uploaded_images/brand-5.png",
+    },
+    {
+      name: "Conseqaur",
+      img: "https://cdn11.bigcommerce.com/s-35csgqmz9s/product_images/uploaded_images/brand-6.png",
+    },
+    {
+      name: "RBQ",
+      img: "https://cdn11.bigcommerce.com/s-35csgqmz9s/product_images/uploaded_images/brand-7.png",
+    },
+  ];
+
+  const visibleCount = 5;
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === brands.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? brands.length - 1 : prevIndex - 1
+    );
+  };
+
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="w-4/5 h-full flex items-center justify-between pt-8 pb-8">
+        <div className="">
+          <h2 className="text-[16px] font-bold uppercase text-[#383e47]">
+            OUR TOP BRAND
+          </h2>
+          <a className="text-[#059] text-[12px] font-bold uppercase">
+            Brown All
+          </a>
+        </div>
+        <div className="flex items-center gap-4">
+          <button
+            className="text-gray-500 hover:text-black text-3xl"
+            onClick={goToPrevious}
+            disabled={currentIndex === 0}
+          >
+            <MdArrowBackIos className="" />
+          </button>
+          <div className="flex overflow-hidden">
+            <div
+              className="flex transition-transform duration-500"
+              style={{
+                transform: `translateX(-${currentIndex * 176}px)`,
+                display: "flex",
+                minWidth: "0",
+              }}
+            >
+              {brands.map((brand, index) => (
+                <Box
+                  key={index}
+                  className="outline-custom flex-none w-[176px] h-full rounded flex items-center justify-center shadow-custom cursor-pointer"
+                  sx={{
+                    "&:hover": {
+                      outline: "1px solid gray",
+                    },
+                  }}
+                >
+                  <img
+                    src={brand.img}
+                    alt={brand.name}
+                    className="max-h-full max-w-full"
+                  />
+                </Box>
+              ))}
+            </div>
+          </div>
+          <button
+            className="text-gray-500 hover:text-black text-3xl"
+            onClick={goToNext}
+            disabled={currentIndex >= brands.length - visibleCount}
+          >
+            <MdArrowForwardIos className="" />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
